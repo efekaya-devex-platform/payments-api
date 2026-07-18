@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-api
+  labels:
+    app: payments-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payments-api
+  template:
+    metadata:
+      labels:
+        app: payments-api
+    spec:
+      containers:
+        - name: app
+          # image path is the repo, that's where CI pushes (github.repository)
+          image: ghcr.io/efekaya-devex-platform/payments-api:latest
+          ports:
+            - containerPort: 8080
+              name: http
+          readinessProbe:
+            httpGet: { path: /healthz, port: http }
+          resources:
+            requests: { cpu: 50m, memory: 64Mi }
+            limits: { cpu: 250m, memory: 128Mi }

@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: payments-api
+  description: Handles payment capture and refunds
+  annotations:
+    github.com/project-slug: efekaya-devex-platform/payments-api
+    backstage.io/kubernetes-label-selector: app=payments-api
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  lifecycle: experimental
+  owner: group:default/team-beta
